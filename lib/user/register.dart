@@ -17,6 +17,8 @@ class _RegisterState extends State<Register> {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneNoController = TextEditingController();
+  TextEditingController bonusController = TextEditingController();
+  TextEditingController amountNoController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController repassWordController = TextEditingController();
   String selectedUserType = UserType.user;
@@ -60,6 +62,8 @@ class _RegisterState extends State<Register> {
     String fullName = fullNameController.text.trim();
     String email = emailController.text.trim().toLowerCase();
     int phoneNo = int.parse(phoneNoController.text.trim());
+    double amount = double.parse(phoneNoController.text.trim());
+    double bonus = double.parse(phoneNoController.text.trim());
     String password = passwordController.text.trim();
 
     debugPrint("Email: $email, Phone No.: $phoneNo");
@@ -92,6 +96,8 @@ class _RegisterState extends State<Register> {
         "fullName": fullName,
         "email": email,
         "phoneNo": phoneNo,
+        "amount": amount,
+        "bonus": bonus,
         "password": password
       });
 
@@ -190,6 +196,46 @@ class _RegisterState extends State<Register> {
     );
   }
 
+
+  getBonusTextField() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      maxLength: 10,
+      maxLengthEnforced: true,
+      style: TextStyle(fontSize: 14.0),
+      controller: bonusController,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return "Bonus Required";
+        }
+      },
+      decoration: InputDecoration(
+          labelText: "Bonus",
+          hintText: "Please Enter Bonus",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+    );
+  }
+
+  
+  getAmountTextField() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      maxLength: 10,
+      maxLengthEnforced: true,
+      style: TextStyle(fontSize: 14.0),
+      controller: amountNoController,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return "Amount Required";
+        }
+      },
+      decoration: InputDecoration(
+          labelText: "Amount",
+          hintText: "Please Enter Amount",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+    );
+  }
+
   getPasswordTextField() {
     return TextFormField(
       keyboardType: TextInputType.text,
@@ -267,6 +313,12 @@ class _RegisterState extends State<Register> {
         Padding(
             padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: getPhoneNoTextField()),
+        Padding(
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: getAmountTextField()),
+        Padding(
+            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+            child: getBonusTextField()),
         Padding(
             padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: getPasswordTextField()),
