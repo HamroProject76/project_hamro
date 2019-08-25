@@ -62,8 +62,8 @@ class _RegisterState extends State<Register> {
     String fullName = fullNameController.text.trim();
     String email = emailController.text.trim().toLowerCase();
     int phoneNo = int.parse(phoneNoController.text.trim());
-    double amount = double.parse(phoneNoController.text.trim());
-    double bonus = double.parse(phoneNoController.text.trim());
+    double amount = double.parse(amountNoController.text.trim());
+    double bonus = CurrentUser.userType == UserType.user ? 0 : double.parse(bonusController.text.trim());
     String password = passwordController.text.trim();
 
     debugPrint("Email: $email, Phone No.: $phoneNo");
@@ -339,6 +339,9 @@ class _RegisterState extends State<Register> {
       Padding(
           padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
           child: getPhoneNoTextField()),
+      Padding(
+          padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+          child: getAmountTextField()),
       Padding(
           padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
           child: getPasswordTextField()),
